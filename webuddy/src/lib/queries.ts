@@ -21,7 +21,7 @@ import {
 } from './types'
 import { z } from 'zod'
 import { revalidatePath } from 'next/cache'
-import { v4 as uuidv4 } from ('uuid');
+import { v4 } from 'uuid'
 
 export const getAuthUserDetails = async () => {
   
@@ -317,7 +317,7 @@ export const upsertSubAccount = async (subAccount: SubAccount) => {
     },
   })
   if (!agencyOwner) return console.log('🔴Erorr could not create subaccount')
-  const permissionId = uuidv4()
+  const permissionId = v4()
   const response = await db.subAccount.upsert({
     where: { id: subAccount.id },
     update: subAccount,
@@ -572,7 +572,7 @@ export const upsertFunnel = async (
     update: funnel,
     create: {
       ...funnel,
-      id: funnelId || uuidv4(),
+      id: funnelId || v4(),
       subAccountId: subaccountId,
     },
   })
@@ -584,7 +584,7 @@ export const upsertPipeline = async (
   pipeline: Prisma.PipelineUncheckedCreateWithoutLaneInput
 ) => {
   const response = await db.pipeline.upsert({
-    where: { id: pipeline.id || uuidv4() },
+    where: { id: pipeline.id || v4() },
     update: pipeline,
     create: pipeline,
   })
@@ -656,7 +656,7 @@ export const upsertLane = async (lane: Prisma.LaneUncheckedCreateInput) => {
   }
 
   const response = await db.lane.upsert({
-    where: { id: lane.id || uuidv4() },
+    where: { id: lane.id || v4() },
     update: lane,
     create: { ...lane, order },
   })
@@ -743,7 +743,7 @@ export const upsertTicket = async (
 
   const response = await db.ticket.upsert({
     where: {
-      id: ticket.id || uuidv4(),
+      id: ticket.id || v4(),
     },
     update: { ...ticket, Tags: { set: tags } },
     create: { ...ticket, Tags: { connect: tags }, order },
@@ -773,7 +773,7 @@ export const upsertTag = async (
   tag: Prisma.TagUncheckedCreateInput
 ) => {
   const response = await db.tag.upsert({
-    where: { id: tag.id || uuidv4(), subAccountId: subaccountId },
+    where: { id: tag.id || v4(), subAccountId: subaccountId },
     update: tag,
     create: { ...tag, subAccountId: subaccountId },
   })
@@ -798,7 +798,7 @@ export const upsertContact = async (
   contact: Prisma.ContactUncheckedCreateInput
 ) => {
   const response = await db.contact.upsert({
-    where: { id: contact.id || uuidv4() },
+    where: { id: contact.id || v4() },
     update: contact,
     create: contact,
   })

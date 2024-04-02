@@ -10,7 +10,7 @@ export default authMiddleware({
   async afterAuth(auth, req) {
     //rewrite for domains
     const url = req.nextUrl
-    console.log(url)
+    // console.logs(url)
     const searchParams = url.searchParams.toString()
     let hostname = req.headers
     const pathWithSearchParams = `${url.pathname}${
