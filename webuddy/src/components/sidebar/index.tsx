@@ -47,7 +47,7 @@ const Sidebar = async ({ id, type }: Props) => {
 
   return (
     <>
-      {/* <MenuOptions
+      <MenuOptions
         defaultOpen={true}
         details={details}
         id={id}
@@ -55,7 +55,7 @@ const Sidebar = async ({ id, type }: Props) => {
         sidebarOpt={sidebarOpt}
         subAccounts={subaccounts}
         user={user}
-      /> */}
+      />
       <MenuOptions
         details={details}
         id={id}
