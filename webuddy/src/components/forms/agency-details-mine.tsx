@@ -135,11 +135,9 @@ const AgencyDetails = ({ data }: Props) => {
       }
 
       newUserData = await initUser({ role: 'AGENCY_OWNER' })
-      if (!data?.id){
-
-      await upsertAgency({
+      if (!data?.id) {
+        await upsertAgency({
         id: data?.id ? data.id : v4(),
-        customerId: data?.customerId || custId || '',
         address: values.address,
         agencyLogo: values.agencyLogo,
         city: values.city,
@@ -158,20 +156,16 @@ const AgencyDetails = ({ data }: Props) => {
       toast({
         title: 'Created Agency',
       })
-      return router.refresh()
-    
-    }
-    }
-     catch (error) {
+     return router.refresh()
+    }}catch (error) {
       console.log(error)
       toast({
         variant: 'destructive',
         title: 'Oppse!',
         description: 'could not create your agency',
       })
-    }
-  }
-
+    }}
+  
   const handleDeleteAgency = async () => {
     if (!data?.id) return
     setDeletingAgency(true)
@@ -464,7 +458,7 @@ const AgencyDetails = ({ data }: Props) => {
               <AlertDialogAction
                 disabled={deletingAgency}
                 className="bg-destructive hover:bg-destructive"
-                onClick={handleDeleteAgency}
+                // onClick={handleDeleteAgency}
               >
                 Delete
               </AlertDialogAction>
