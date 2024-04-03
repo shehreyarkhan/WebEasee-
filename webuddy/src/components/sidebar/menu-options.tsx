@@ -81,6 +81,7 @@ const MenuOptions = ({
       </SheetTrigger>
 
       <SheetContent
+      
         showX={!defaultOpen}
         side={'left'}
         className={clsx(
