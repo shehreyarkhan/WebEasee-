@@ -285,7 +285,7 @@ const MenuOptions = ({
                           href={sidebarOptions.link}
                           className="flex items-center gap-2 hover:bg-transparent rounded-md transition-all md:w-full w-[320px]"
                         >
-                          {val}
+                          {val} 
                           <span>{sidebarOptions.name}</span>
                         </Link>
                       </CommandItem>
