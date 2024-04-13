@@ -103,6 +103,7 @@ const AgencyDetails = ({ data }: Props) => {
         const bodyData = {
           email: values.companyEmail,
           name: values.name,
+          
           shipping: {
             address: {
               city: values.city,
