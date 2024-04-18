@@ -99,7 +99,7 @@ const AgencyDetails = ({ data }: Props) => {
     try {
       let newUserData
       let custId
-      if (!data?.id) {
+      if (data?.id) {
         const bodyData = {
           email: values.companyEmail,
           name: values.name,

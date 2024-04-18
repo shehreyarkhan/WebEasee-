@@ -410,6 +410,21 @@ export const updateUser = async (user: Partial<User>) => {
   return response
 }
 
+export const updateAgency = async (agency: Partial<Agency>, user: Partial<User>) => {
+  const response = await db.agency.update({
+    where: { id: agency.id },
+    data: { ...agency },
+  })
+
+  await clerkClient.users.updateUserMetadata(response.id, {
+    privateMetadata: {
+      role: user.role || 'SUBACCOUNT_USER',
+    },
+  })
+
+  return response
+}
+
 export const changeUserPermissions = async (
   permissionId: string | undefined,
   userEmail: string,
