@@ -94,21 +94,25 @@ const TicketForm = ({ getNewTicket, laneId, subaccountId }: Props) => {
       form.reset({
         name: defaultData.ticket.name || '',
         description: defaultData.ticket?.description || '',
-        value: String(defaultData.ticket?.value || 0),
+        value: (defaultData.ticket?.value || 0).toString(),
       })
       if (defaultData.ticket.customerId)
-        setContact(defaultData.ticket.customerId)
+        setContact((defaultData.ticket.customerId).toString())
+        console.log(contact + "def contact")
 
       const fetchData = async () => {
         const response = await searchContacts(
           //@ts-ignore
           defaultData.ticket?.Customer?.name
         )
-        setContactList(response)
+        setContactList((response))
+        
       }
       fetchData()
     }
-  }, [defaultData])
+console.log(contact, "contact set")
+
+  }, [defaultData, contact])
 
   const onSubmit = async (values: z.infer<typeof TicketFormSchema>) => {
     if (!laneId) return
@@ -145,6 +149,7 @@ const TicketForm = ({ getNewTicket, laneId, subaccountId }: Props) => {
     }
     setClose()
   }
+
 
   return (
     <Card className="w-full">
@@ -281,7 +286,7 @@ const TicketForm = ({ getNewTicket, laneId, subaccountId }: Props) => {
               </PopoverTrigger>
               <PopoverContent className="w-[400px] p-0">
                 <Command>
-                  <CommandInput
+                  {/* <CommandInput
                     placeholder="Search..."
                     className="h-9"
                     value={search}
@@ -300,7 +305,7 @@ const TicketForm = ({ getNewTicket, laneId, subaccountId }: Props) => {
                       }, 1000)
                     }}
                   />
-                  <CommandEmpty>No Customer found.</CommandEmpty>
+                  <CommandEmpty>No Customer found.</CommandEmpty> */}
                   <CommandGroup>
                     {contactList.map((c) => (
                       <CommandItem
@@ -312,7 +317,7 @@ const TicketForm = ({ getNewTicket, laneId, subaccountId }: Props) => {
                           )
                         }}
                       >
-                        {c.name}
+                        {c?.name}
                         <CheckIcon
                           className={cn(
                             'ml-auto h-4 w-4',
