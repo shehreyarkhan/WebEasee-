@@ -6,7 +6,7 @@ import {
   upsertTicket,
 } from '@/lib/queries'
 import { TicketFormSchema, TicketWithTags } from '@/lib/types'
-import { useModal } from '@/providers/modal-provider'
+import { useModal } from '@/providers/modal-proivder'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Contact, Tag, User } from '@prisma/client'
 import { useRouter } from 'next/navigation'
