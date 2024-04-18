@@ -286,7 +286,7 @@ console.log(contact, "contact set")
               </PopoverTrigger>
               <PopoverContent className="w-[400px] p-0">
                 <Command>
-                  {/* <CommandInput
+                  <CommandInput
                     placeholder="Search..."
                     className="h-9"
                     value={search}
@@ -305,7 +305,7 @@ console.log(contact, "contact set")
                       }, 1000)
                     }}
                   />
-                  <CommandEmpty>No Customer found.</CommandEmpty> */}
+                  <CommandEmpty>No Customer found.</CommandEmpty>
                   <CommandGroup>
                     {contactList.map((c) => (
                       <CommandItem
