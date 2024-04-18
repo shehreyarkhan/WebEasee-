@@ -268,7 +268,50 @@ console.log(contact, "contact set")
               </SelectContent>
             </Select>
             <FormLabel>Customer</FormLabel>
-            <Popover>
+            <Select
+              onValueChange={(currentValue) => {
+                setContact(
+                  currentValue === contact ? '' : currentValue
+                )
+              }}
+              defaultValue={assignedTo}
+            >
+              <SelectTrigger>
+                <SelectValue
+                  placeholder={
+                    <div className="flex items-center gap-2">
+                      <Avatar className="w-8 h-8">
+                        <AvatarImage alt="contact" />
+                        <AvatarFallback className="bg-primary text-sm text-white">
+                          <User2 size={14} />
+                        </AvatarFallback>
+                      </Avatar>
+
+                      <span className="text-sm text-muted-foreground">
+                        Not Assigned
+                      </span>
+                    </div>
+                  }
+                />
+              </SelectTrigger>
+              <SelectContent>
+                {contactList.map((contactListt) => (
+                  <SelectItem
+                    key={contactListt.id}
+                    value={contactListt.id}
+                  >
+                    <div className="flex items-center gap-2">
+                      
+
+                      <span className="text-sm text-muted-foreground">
+                        {contactListt.name}
+                      </span>
+                    </div>
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            {/* <Popover>
               <PopoverTrigger
                 asChild
                 className="w-full"
@@ -329,7 +372,7 @@ console.log(contact, "contact set")
                   </CommandGroup>
                 </Command>
               </PopoverContent>
-            </Popover>
+            </Popover> */}
             <Button
               className="w-20 mt-4"
               disabled={isLoading}
