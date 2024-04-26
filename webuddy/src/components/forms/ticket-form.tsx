@@ -110,7 +110,6 @@ const TicketForm = ({ getNewTicket, laneId, subaccountId }: Props) => {
       }
       fetchData()
     }
-console.log(contact, "contact set")
 
   }, [defaultData, contact])
 
@@ -274,7 +273,7 @@ console.log(contact, "contact set")
                   currentValue === contact ? '' : currentValue
                 )
               }}
-              defaultValue={assignedTo}
+              defaultValue={contact}
             >
               <SelectTrigger>
                 <SelectValue
@@ -295,7 +294,7 @@ console.log(contact, "contact set")
                 />
               </SelectTrigger>
               <SelectContent>
-                {contactList.map((contactListt) => (
+                {contactList?.map((contactListt) => (
                   <SelectItem
                     key={contactListt.id}
                     value={contactListt.id}
