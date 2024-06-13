@@ -99,11 +99,10 @@ const AgencyDetails = ({ data }: Props) => {
     try {
       let newUserData
       let custId
-      if (data?.id) {
+      if (!data?.id) {
         const bodyData = {
           email: values.companyEmail,
           name: values.name,
-          
           shipping: {
             address: {
               city: values.city,
@@ -123,22 +122,22 @@ const AgencyDetails = ({ data }: Props) => {
           },
         }
 
-        // const customerResponse = await fetch('/api/stripe/create-customer', {
-        //   method: 'POST',
-        //   headers: {
-        //     'Content-Type': 'application/json',
-        //   },
-        //   body: JSON.stringify(bodyData),
-        // })
-        // const customerData: { customerId: string } =
-        //   await customerResponse.json()
-        // custId = customerData.customerId
+        const customerResponse = await fetch('/api/stripe/create-customer', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(bodyData),
+        })
+        const customerData: { customerId: string } =
+          await customerResponse.json()
+        custId = customerData.customerId
       }
 
       newUserData = await initUser({ role: 'AGENCY_OWNER' })
-      if (!data?.id){
+      if (!data?.customerId && !custId) return
 
-      await upsertAgency({
+      const response = await upsertAgency({
         id: data?.id ? data.id : v4(),
         customerId: data?.customerId || custId || '',
         address: values.address,
@@ -159,11 +158,11 @@ const AgencyDetails = ({ data }: Props) => {
       toast({
         title: 'Created Agency',
       })
-      return router.refresh()
-    
-    }
-    }
-     catch (error) {
+      if (data?.id) return router.refresh()
+      if (response) {
+        return router.refresh()
+      }
+    } catch (error) {
       console.log(error)
       toast({
         variant: 'destructive',
@@ -172,7 +171,6 @@ const AgencyDetails = ({ data }: Props) => {
       })
     }
   }
-
   const handleDeleteAgency = async () => {
     if (!data?.id) return
     setDeletingAgency(true)
